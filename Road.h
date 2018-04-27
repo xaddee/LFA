@@ -9,7 +9,7 @@
 
 class Road {
     char  _letter;
-    Symbol* _next_symbol;
+    Symbol _next_symbol;
 
 public:
     Road();

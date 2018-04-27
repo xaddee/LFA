@@ -13,12 +13,32 @@ Symbol::~Symbol()
 
 }
 
-void Symbol::setName(char name)
+void Symbol::setNumberOfRoads(int number)
 {
-    _name = name;
+    _number_of_roads =  number;
 }
 
-char Symbol::showName()
+int Symbol::showNumberOfRoads()
 {
-    return _name;
+    return _number_of_roads;
+}
+
+int Symbol::showIndex()
+{
+    return _index;
+}
+
+void Symbol::setIndex(int index)
+{
+    _index = index;
+}
+
+void Symbol::setFinal(bool value)
+{
+    _final = value;
+}
+
+bool Symbol::showFinal()
+{
+    return _final;
 }

@@ -4,20 +4,26 @@
 
 #ifndef LFA_HOMEWORK2_SYMBOL_H
 #define LFA_HOMEWORK2_SYMBOL_H
-#include "Road.h"
+
 #include <iostream>
 #include <vector>
 
 class Symbol {
-    char _name;
     int _number_of_roads;
+    int _index;
+    bool _final;
 public:
     Symbol();
     ~Symbol();
-    void setName(char);
-    char showName();
+
     void setNumberOfRoads(int);
     int showNumberOfRoads();
+
+    void setIndex(int);
+    int showIndex();
+
+    bool showFinal();
+    void setFinal(bool);
 };
 
 
