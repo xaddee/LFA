@@ -40,11 +40,9 @@ int main()
 
     unsigned int number_of_symbols;
     f >> number_of_symbols;
-    std::cout << number_of_symbols;
 
     char word[21];
     f >> word;
-    std::cout << word;
 
     Road **roads;
 
@@ -92,8 +90,8 @@ int main()
     if (word[0] == '#')
     {
         std::cout << symbols[0].showFinal();
-        if (symbols[0].showFinal()) std::cout << "Cuvantul apartine alfabetului";
-        else std::cout << "Cuvantul nu apartine alfabetului";
+        if (symbols[0].showFinal()) std::cout << "Cuvantul apartine gramaticii.";
+        else std::cout << "Cuvantul nu apartine gramaticii.";
     }
     else if(CheckWord(word,roads,symbols[0],0)) std::cout << "Cuvantul apartine gramaticii.";
     else std::cout << "Cuvantul nu apartine gramaticii.";
