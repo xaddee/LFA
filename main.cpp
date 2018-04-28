@@ -10,7 +10,7 @@
  *
  * @param word char*, representing the word that we verify
  * @param roads is a matrix that represents all the roads from all the symbols
- * @param start the start symbol
+ * @param start the starting symbol
  * @param current_letter_index the letter in word that we verify
  * @return true/false if the word belongs or not to the grammar
  */
@@ -33,6 +33,31 @@ bool CheckWord(char* word, Road **roads ,Symbol start, int current_letter_index)
     return false;
 }
 
+/**
+ *
+ * @param maximum the maximum length of the word
+ * @param roads is a matrix that represents all the roads from all the symbols
+ * @param start the starting symbol
+ * @param current_index the number of letters generated
+ * @param word the generated word
+ */
+
+void GenerateWords(int maximum, Road **roads, Symbol start,int current_index,char * word)
+{
+    if(current_index == maximum )
+    {
+        std::cout << word << " ";
+        return;
+    }
+
+    for(int i = 0; i < start.showNumberOfRoads(); i++)
+    {
+        word[current_index] = roads[start.showIndex()][i].showLetter();
+        GenerateWords(maximum, roads, roads[start.showIndex()][i].showNextSymbol(),current_index+1,word);
+    }
+    //return;
+}
+
 // lamda este #
 int main()
 {
@@ -41,14 +66,7 @@ int main()
 
     unsigned int number_of_symbols;
     f >> number_of_symbols;
-    int number_of_words;
-    f >> number_of_words;
 
-    char words[number_of_words][21];
-
-    for (int word_index = 0; word_index < number_of_words; word_index++) {
-        f >> words[word_index];
-    }
     Road **roads;
 
     roads = new Road *[number_of_symbols];
@@ -94,24 +112,53 @@ int main()
         }
     }
 
-    for(int word_index = 0; word_index < number_of_words; word_index++)
+    std::cout << "Generare cuvant sau verificare? (1/0)?";
+    int x;
+    std::cin >> x;
+
+    if(!x)
     {
-        if (words[word_index] == "#")
+        int number_of_words;
+        std::cout << "Introduceti numarul de cuvinte de verificat (maxim 21 caractere): ";
+        std::cin >> number_of_words;
+
+        char words[number_of_words][21];
+
+        for (int word_index = 0; word_index < number_of_words; word_index++) {
+            std::cout << "Introduceti cuvantul " << word_index << ": ";
+            std::cin >> words[word_index];
+        }
+
+        for(int word_index = 0; word_index < number_of_words; word_index++)
         {
-            if (symbols[0].showFinal())
-                std::cout << "Cuvantul apartine gramaticii. \n";
+            if (words[word_index] == "#")
+            {
+                if (symbols[0].showFinal())
+                    std::cout << "Cuvantul apartine gramaticii. \n";
+                else
+                    std::cout << "Cuvantul nu apartine gramaticii. \n";
+            }
             else
-                std::cout << "Cuvantul nu apartine gramaticii. \n";
-        }
-        else
-        if (CheckWord(words[word_index], roads, symbols[0], 0))
-        {
-            std::cout << "Cuvantul apartine gramaticii.\n";
-        }
-        else
-        {
-            std::cout << "Cuvantul nu apartine gramaticii.\n";
-        }
+            if (CheckWord(words[word_index], roads, symbols[0], 0))
+            {
+                std::cout << "Cuvantul apartine gramaticii.\n";
+            }
+            else
+            {
+                std::cout << "Cuvantul nu apartine gramaticii.\n";
+            }
+    }
+    }
+    else
+    {
+        std::cout << "Introduceti lungimea maxima: ";
+        int maximum;
+        std::cin >> maximum;
+
+        char word[maximum];
+
+        GenerateWords(maximum, roads, symbols[0],0,word);
+
     }
 
     return 0;
